@@ -2,7 +2,7 @@
 local toggleKey = Enum.KeyCode.P
 local shutdownKey = Enum.KeyCode.U
 local minESPsize = 2
-local lazerWidth = 0.05
+local lazerWidth = 0.1
 -----------------------------------------------------------------------------------------------------------------
 
 -- Global Variables ---------------------------------------------------------------------------------------------
