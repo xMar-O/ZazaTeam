@@ -101,54 +101,53 @@ local function lookAtBoard(board)
 end
 
 local function addLaser(part)
-	if not part or not part:IsA("Attachment") then
-		return
-	end
+    if not part or not part:IsA("Attachment") then
+        return
+    end
 
-	local laserPart = Instance.new("Part")
-	laserPart.Parent = workspace
-	laserPart.Anchored = true
-	laserPart.CanCollide = false
-	laserPart.CastShadow = false
-	laserPart.Material = Enum.Material.Neon
-	laserPart.Color = Color3.fromRGB(255, 0, 0)
-	laserPart.Size = Vector3.new(lazerWidth, lazerWidth, 1)
+    local laserPart = Instance.new("Part")
+    laserPart.Parent = workspace
+    laserPart.Anchored = true
+    laserPart.CanCollide = false
+    laserPart.CastShadow = false
+    laserPart.Material = Enum.Material.Neon
+    laserPart.Color = Color3.fromRGB(255, 0, 0)
+    laserPart.Size = Vector3.new(lazerWidth, lazerWidth, 1)
 
-	local function updateLaser()
-		if not part or not part.Parent then
-			laserPart:Destroy()
-			return
-		end
+    local function updateLaser()
+        if not part or not part.Parent then
+            laserPart:Destroy()
+            return
+        end
 
-		local startPos = part.WorldCFrame.Position
-		local direction = part.WorldCFrame.LookVector * 5000
-		local rayOrigin = startPos
-		local rayDirection = direction
+        local startPos = part.WorldPosition  -- FIXED: Use WorldPosition instead of WorldCFrame.Position
+        local direction = part.WorldCFrame.LookVector * 5000
 
-		local raycastParams = RaycastParams.new()
-		raycastParams.FilterDescendantsInstances = {part.Parent.Parent, laserPart, workspace:FindFirstChild(plr.Name)}
-		raycastParams.FilterType = Enum.RaycastFilterType.Exclude
-		raycastParams.IgnoreWater = true
+        local raycastParams = RaycastParams.new()
+        raycastParams.FilterDescendantsInstances = {part.Parent.Parent, laserPart, workspace:FindFirstChild(plr.Name)}
+        raycastParams.FilterType = Enum.RaycastFilterType.Exclude
+        raycastParams.IgnoreWater = true
 
-		local raycastResult = workspace:Raycast(rayOrigin, rayDirection, raycastParams)
+        local raycastResult = workspace:Raycast(startPos, direction, raycastParams)
 
-		if raycastResult then
-			local hitPoint = raycastResult.Position
-			local laserLength = (hitPoint - startPos).Magnitude
+        if raycastResult then
+            local hitPoint = raycastResult.Position
+            local laserLength = (hitPoint - startPos).Magnitude
 
-			laserPart.Size = Vector3.new(lazerWidth, lazerWidth, laserLength)
-			laserPart.CFrame = CFrame.new(startPos, hitPoint) * CFrame.new(0, 0, -laserLength / 2)
-		else
-			local maxEnd = startPos + direction
-			local laserLength = (maxEnd - startPos).Magnitude
+            laserPart.Size = Vector3.new(lazerWidth, lazerWidth, laserLength)
+            laserPart.CFrame = CFrame.new(startPos, hitPoint) * CFrame.new(0, 0, -laserLength / 2)
+        else
+            local maxEnd = startPos + direction
+            local laserLength = (maxEnd - startPos).Magnitude
 
-			laserPart.Size = Vector3.new(lazerWidth, lazerWidth, laserLength)
-			laserPart.CFrame = CFrame.new(startPos, maxEnd) * CFrame.new(0, 0, -laserLength / 2)
-		end
-	end
+            laserPart.Size = Vector3.new(lazerWidth, lazerWidth, laserLength)
+            laserPart.CFrame = CFrame.new(startPos, maxEnd) * CFrame.new(0, 0, -laserLength / 2)
+        end
+    end
 
-	game:GetService("RunService").Heartbeat:Connect(updateLaser)
+    game:GetService("RunService").Heartbeat:Connect(updateLaser)
 end
+
 
 if game.ReplicatedFirst:FindFirstChild("doiii") then
     game.ReplicatedFirst:FindFirstChild("doiii").Enabled = false
