@@ -2,7 +2,7 @@
 local toggleKey = Enum.KeyCode.P
 local shutdownKey = nil
 local minESPsize = 2
-local lazerWidth = 0.05
+local lazerWidth = 0.2
 -----------------------------------------------------------------------------------------------------------------
 
 -- Global Variables ---------------------------------------------------------------------------------------------
@@ -100,54 +100,53 @@ local function lookAtBoard(board)
 	end)
 end
 
+local plr = game.Players.LocalPlayer
+
 local function addLaser(part)
-	if not part or not part:IsA("Attachment") then
-		return
-	end
+    if not part or not part:IsA("BasePart") then
+        return
+    end
 
-	local laserPart = Instance.new("Part")
-	laserPart.Parent = workspace
-	laserPart.Anchored = true
-	laserPart.CanCollide = false
-	laserPart.CastShadow = false
-	laserPart.Material = Enum.Material.Neon
-	laserPart.Color = Color3.fromRGB(255, 0, 0)
-	laserPart.Size = Vector3.new(lazerWidth, lazerWidth, 1)
+    local laserPart = Instance.new("Part")
+    laserPart.Parent = workspace
+    laserPart.Anchored = true
+    laserPart.CanCollide = false
+    laserPart.CastShadow = false
+    laserPart.Material = Enum.Material.Neon
+    laserPart.Color = Color3.fromRGB(255, 0, 0)
+    laserPart.Size = Vector3.new(laserWidth, laserWidth, 1)
 
-	local function updateLaser()
-		if not part or not part.Parent then
-			laserPart:Destroy()
-			return
-		end
+    local heartbeatConn
+    heartbeatConn = game:GetService("RunService").Heartbeat:Connect(function()
+        if not part or not part.Parent then
+            heartbeatConn:Disconnect()
+            laserPart:Destroy()
+            return
+        end
 
-		local startPos = part.WorldCFrame.Position
-		local direction = part.WorldCFrame.LookVector * 5000
-		local rayOrigin = startPos
-		local rayDirection = direction
+        local startPos = part.Position + (part.CFrame.UpVector / 3.5)
+        local direction = part.CFrame.LookVector * 5000
+        local rayOrigin = startPos
+        local rayDirection = direction
 
-		local raycastParams = RaycastParams.new()
-		raycastParams.FilterDescendantsInstances = {part.Parent.Parent, laserPart, workspace:FindFirstChild(plr.Name)}
-		raycastParams.FilterType = Enum.RaycastFilterType.Exclude
-		raycastParams.IgnoreWater = true
+        local raycastParams = RaycastParams.new()
+        raycastParams.FilterDescendantsInstances = {part.Parent, workspace:WaitForChild(plr.Name), laserPart}
+        raycastParams.FilterType = Enum.RaycastFilterType.Exclude
+        raycastParams.IgnoreWater = true
 
-		local raycastResult = workspace:Raycast(rayOrigin, rayDirection, raycastParams)
+        local raycastResult = workspace:Raycast(rayOrigin, rayDirection, raycastParams)
+        local hitPoint
 
-		if raycastResult then
-			local hitPoint = raycastResult.Position
-			local laserLength = (hitPoint - startPos).Magnitude
+        if raycastResult then
+            hitPoint = raycastResult.Position
+        else
+            hitPoint = startPos + direction
+        end
 
-			laserPart.Size = Vector3.new(lazerWidth, lazerWidth, laserLength)
-			laserPart.CFrame = CFrame.new(startPos, hitPoint) * CFrame.new(0, 0, -laserLength / 2)
-		else
-			local maxEnd = startPos + direction
-			local laserLength = (maxEnd - startPos).Magnitude
-
-			laserPart.Size = Vector3.new(lazerWidth, lazerWidth, laserLength)
-			laserPart.CFrame = CFrame.new(startPos, maxEnd) * CFrame.new(0, 0, -laserLength / 2)
-		end
-	end
-
-	game:GetService("RunService").Heartbeat:Connect(updateLaser)
+        local laserLength = (hitPoint - startPos).Magnitude
+        laserPart.Size = Vector3.new(laserWidth, laserWidth, laserLength)
+        laserPart.CFrame = CFrame.new(startPos, hitPoint) * CFrame.new(0, 0, -laserLength / 2)
+    end)
 end
 
 if game.ReplicatedFirst:FindFirstChild("doiii") then
@@ -421,58 +420,58 @@ end)
 
 local lazerModule = window:createNewModule("Lazers")
 
-local pistolLazers = lazerModule:AddButton("Pistol Lazers")
+local pistolLazers = createButton("Pistol Lazers")
 pistolLazers.Activated:Connect(function()
-	for i, g in workspace:GetChildren() do
-		if g.Name == "Pistol" or g.Name == "Snub" and g:FindFirstChild("Root") and g:FindFirstChild("Root"):FindFirstChild("Muzzle") then
-			addLaser(g:FindFirstChild("Root"):FindFirstChild("Muzzle"))
-		end
-	end
+    for i, g in ipairs(workspace:GetChildren()) do
+        if (g.Name == "Pistol" or g.Name == "Snub") and g:FindFirstChild("Root") then
+            addLaser(g:FindFirstChild("Root"))
+        end
+    end
 end)
 
-local kickLazers = lazerModule:AddButton("Kick-10 Lazers")
+local kickLazers = createButton("Kick-10 Lazers")
 kickLazers.Activated:Connect(function()
-	for i, g in workspace:GetChildren() do
-		if g.Name == "ToolboxMAC10" and g:FindFirstChild("Root") and g:FindFirstChild("Root"):FindFirstChild("Muzzle") then
-			addLaser(g:FindFirstChild("Root"):FindFirstChild("Muzzle"))
-		end
-	end
+    for i, g in ipairs(workspace:GetChildren()) do
+        if g.Name == "ToolboxMAC10" and g:FindFirstChild("Root") then
+            addLaser(g:FindFirstChild("Root"))
+        end
+    end
 end)
 
-local carcosaLazers = lazerModule:AddButton("Carcosa Rifle Lazers")
+local carcosaLazers = createButton("Carcosa Rifle Lazers")
 carcosaLazers.Activated:Connect(function()
-	for i, g in workspace:GetChildren() do
-		if g.Name == "Sniper" and g:FindFirstChild("Root") and g:FindFirstChild("Root"):FindFirstChild("Muzzle") then
-			addLaser(g:FindFirstChild("Root"):FindFirstChild("Muzzle"))
-		end
-	end
+    for i, g in ipairs(workspace:GetChildren()) do
+        if g.Name == "Sniper" and g:FindFirstChild("Root") then
+            addLaser(g:FindFirstChild("Root"))
+        end
+    end
 end)
 
-local aceLazers = lazerModule:AddButton("Ace Lazers")
+local aceLazers = createButton("Ace Lazers")
 aceLazers.Activated:Connect(function()
-	for i, g in workspace:GetChildren() do
-		if g.Name == "AceCarbine" and g:FindFirstChild("Root") and g:FindFirstChild("Root"):FindFirstChild("Muzzle") then
-			addLaser(g:FindFirstChild("Root"):FindFirstChild("Muzzle"))
-		end
-	end
+    for i, g in ipairs(workspace:GetChildren()) do
+        if g.Name == "AceCarbine" and g:FindFirstChild("Root") then
+            addLaser(g:FindFirstChild("Root"))
+        end
+    end
 end)
 
-local magnumLazers = lazerModule:AddButton("Magnum Lazers")
+local magnumLazers = createButton("Magnum Lazers")
 magnumLazers.Activated:Connect(function()
-	for i, g in workspace:GetChildren() do
-		if g.Name == "MAGNUM" and g:FindFirstChild("Root") and g:FindFirstChild("Root"):FindFirstChild("Muzzle") then
-			addLaser(g:FindFirstChild("Root"):FindFirstChild("Muzzle"))
-		end
-	end
+    for i, g in ipairs(workspace:GetChildren()) do
+        if g.Name == "MAGNUM" and g:FindFirstChild("Root") then
+            addLaser(g:FindFirstChild("Root"))
+        end
+    end
 end)
 
-local allLazers = lazerModule:AddButton("All Lazers")
+local allLazers = createButton("All Lazers")
 allLazers.Activated:Connect(function()
-	for i, g in workspace:GetChildren() do
-		if (g.Name == "Snub" or g.Name == "Pistol" or g.Name == "DB" or g.Name == "AK47" or g.Name == "ToolboxMAC10" or g.Name == "MP5" or g.Name == "Sniper" or g.Name == "AceCarbine" or g.Name == "MAGNUM") and g:FindFirstChild("Root") and g:FindFirstChild("Root"):FindFirstChild("Muzzle") then
-			addLaser(g:FindFirstChild("Root"):FindFirstChild("Muzzle"))
-		end
-	end
+    for i, g in ipairs(workspace:GetChildren()) do
+        if (g.Name == "Snub" or g.Name == "Pistol" or g.Name == "DB" or g.Name == "AK47" or g.Name == "ToolboxMAC10" or g.Name == "MP5" or g.Name == "Sniper" or g.Name == "AceCarbine" or g.Name == "MAGNUM") and g:FindFirstChild("Root") then
+            addLaser(g:FindFirstChild("Root"))
+        end
+    end
 end)
 
 local miscModule = window:createNewModule("Miscellaneous")
