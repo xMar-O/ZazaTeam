@@ -20,11 +20,11 @@ else
 end
 
 local Style = {
-	name = "No Big Deal",
+	name = "The Zaza Team!",
 	size = UDim2.new(0, 600, 0, 400),
-	primaryColor = Color3.new(0.615686, 0.47451, 0.305882),
-	secondaryColor = Color3.new(0.670588, 0.584314, 0.388235),
-	backgroundColor = Color3.new(0, 0, 0),
+	primaryColor = Color3.new(0.2, 0.4, 0.6),
+	secondaryColor = Color3.new(0.3, 0.6, 0.8),
+	backgroundColor = Color3.new(0.1, 0.1, 0.1),
 	draggable = true,
 	centered = false,
 	freemouse = true,
