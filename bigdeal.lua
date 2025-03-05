@@ -101,7 +101,6 @@ local function lookAtBoard(board)
 end
 
 
-
 local function addLaser(part)
     if not part or not part:IsA("BasePart") then
         return
@@ -114,42 +113,40 @@ local function addLaser(part)
     laserPart.CastShadow = false
     laserPart.Material = Enum.Material.Neon
     laserPart.Color = Color3.fromRGB(255, 0, 0)
-    laserPart.Size = Vector3.new(laserWidth, laserWidth, 1) 
+    laserPart.Size = Vector3.new(laserWidth, laserWidth, 1)
 
-    local function updateLaser()
+    local heartbeatConn
+    heartbeatConn = game:GetService("RunService").Heartbeat:Connect(function()
         if not part or not part.Parent then
+            heartbeatConn:Disconnect()
             laserPart:Destroy()
             return
         end
 
-        -- Get current character reference
-        local character = plr.Character
-        local startPos = part.Position + (part.CFrame.UpVector * 0.5) 
+        local startPos = part.Position + (part.CFrame.UpVector / 3.5)
         local direction = part.CFrame.LookVector * 5000
+        local rayOrigin = startPos
+        local rayDirection = direction
 
         local raycastParams = RaycastParams.new()
-        raycastParams.FilterDescendantsInstances = {part.Parent, character, laserPart}
+        raycastParams.FilterDescendantsInstances = {part.Parent, workspace:WaitForChild(plr.Name), laserPart}
         raycastParams.FilterType = Enum.RaycastFilterType.Exclude
         raycastParams.IgnoreWater = true
 
-        local raycastResult = workspace:Raycast(startPos, direction, raycastParams)
+        local raycastResult = workspace:Raycast(rayOrigin, rayDirection, raycastParams)
+        local hitPoint
 
         if raycastResult then
-            local hitPoint = raycastResult.Position
-            local laserLength = (hitPoint - startPos).Magnitude
-            laserPart.Size = Vector3.new(laserWidth, laserWidth, laserLength)
-            laserPart.CFrame = CFrame.lookAt(startPos, hitPoint) * CFrame.new(0, 0, -laserLength/2)
+            hitPoint = raycastResult.Position
         else
-            local endPos = startPos + direction
-            local laserLength = direction.Magnitude
-            laserPart.Size = Vector3.new(laserWidth, laserWidth, laserLength)
-            laserPart.CFrame = CFrame.lookAt(startPos, endPos) * CFrame.new(0, 0, -laserLength/2)
+            hitPoint = startPos + direction
         end
-    end
 
-    game:GetService("RunService").Heartbeat:Connect(updateLaser)
+        local laserLength = (hitPoint - startPos).Magnitude
+        laserPart.Size = Vector3.new(laserWidth, laserWidth, laserLength)
+        laserPart.CFrame = CFrame.new(startPos, hitPoint) * CFrame.new(0, 0, -laserLength / 2)
+    end)
 end
-
 
 
 if game.ReplicatedFirst:FindFirstChild("doiii") then
