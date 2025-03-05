@@ -2,7 +2,6 @@
 local toggleKey = Enum.KeyCode.P
 local shutdownKey = nil
 local minESPsize = 2
-local lazerWidth = 0.05
 -----------------------------------------------------------------------------------------------------------------
 
 -- Global Variables ---------------------------------------------------------------------------------------------
@@ -105,6 +104,9 @@ local function addLaser(part)
         return
     end
 
+    local laserWidth = 0.1 -- Define laser width (adjust as needed)
+    local plr = game.Players.LocalPlayer -- Get the local player
+
     local laserPart = Instance.new("Part")
     laserPart.Parent = workspace
     laserPart.Anchored = true
@@ -112,7 +114,7 @@ local function addLaser(part)
     laserPart.CastShadow = false
     laserPart.Material = Enum.Material.Neon
     laserPart.Color = Color3.fromRGB(255, 0, 0)
-    laserPart.Size = Vector3.new(lazerWidth, lazerWidth, 1)
+    laserPart.Size = Vector3.new(laserWidth, laserWidth, 1) -- Fixed variable name
 
     local function updateLaser()
         if not part or not part.Parent then
@@ -120,11 +122,11 @@ local function addLaser(part)
             return
         end
 
-        local startPos = part.WorldPosition  -- FIXED: Use WorldPosition instead of WorldCFrame.Position
+        local startPos = part.WorldPosition
         local direction = part.WorldCFrame.LookVector * 5000
 
         local raycastParams = RaycastParams.new()
-        raycastParams.FilterDescendantsInstances = {part.Parent.Parent, laserPart, workspace:FindFirstChild(plr.Name)}
+        raycastParams.FilterDescendantsInstances = {part.Parent.Parent, laserPart, plr.Character}
         raycastParams.FilterType = Enum.RaycastFilterType.Exclude
         raycastParams.IgnoreWater = true
 
@@ -133,15 +135,13 @@ local function addLaser(part)
         if raycastResult then
             local hitPoint = raycastResult.Position
             local laserLength = (hitPoint - startPos).Magnitude
-
-            laserPart.Size = Vector3.new(lazerWidth, lazerWidth, laserLength)
-            laserPart.CFrame = CFrame.new(startPos, hitPoint) * CFrame.new(0, 0, -laserLength / 2)
+            laserPart.Size = Vector3.new(laserWidth, laserWidth, laserLength)
+            laserPart.CFrame = CFrame.lookAt(startPos, hitPoint) * CFrame.new(0, 0, -laserLength / 2)
         else
             local maxEnd = startPos + direction
             local laserLength = (maxEnd - startPos).Magnitude
-
-            laserPart.Size = Vector3.new(lazerWidth, lazerWidth, laserLength)
-            laserPart.CFrame = CFrame.new(startPos, maxEnd) * CFrame.new(0, 0, -laserLength / 2)
+            laserPart.Size = Vector3.new(laserWidth, laserWidth, laserLength)
+            laserPart.CFrame = CFrame.lookAt(startPos, maxEnd) * CFrame.new(0, 0, -laserLength / 2)
         end
     end
 
