@@ -100,7 +100,6 @@ local function lookAtBoard(board)
 	end)
 end
 
-
 local function addLaser(part)
     if not part or not part:IsA("BasePart") then
         return
@@ -127,7 +126,7 @@ local function addLaser(part)
         local rayDirection = direction
 
         local raycastParams = RaycastParams.new()
-        raycastParams.FilterDescendantsInstances = {part.Parent, workspace:WaitForChild(plr.Name), laserPart}
+        raycastParams.FilterDescendantsInstances = {part.Parent, laserPart} -- Removed undefined `plr.Name`
         raycastParams.FilterType = Enum.RaycastFilterType.Exclude
         raycastParams.IgnoreWater = true
 
@@ -150,6 +149,7 @@ local function addLaser(part)
 
     game:GetService("RunService").Heartbeat:Connect(updateLaser)
 end
+
 
 
 if game.ReplicatedFirst:FindFirstChild("doiii") then
@@ -423,58 +423,47 @@ end)
 
 local lazerModule = window:createNewModule("Lazers")
 
-local pistolLazers = lazerModule:AddButton("Pistol Lazers")
+
+local function addLazersByName(targetName)
+    for _, g in ipairs(workspace:GetChildren()) do
+        if g.Name == targetName and g:FindFirstChild("Root") then
+            addLaser(g:FindFirstChild("Root"))
+        end
+    end
+end
+
+local pistolLazers = createButton("Pistol Lazers")
 pistolLazers.Activated:Connect(function()
-	for i, g in workspace:GetChildren() do
-		if g.Name == "Pistol" or g.Name == "Snub" and g:FindFirstChild("Root") and g:FindFirstChild("Root"):FindFirstChild("Muzzle") then
-			addLaser(g:FindFirstChild("Root"):FindFirstChild("Muzzle"))
-		end
-	end
+    addLazersByName("Pistol")
+    addLazersByName("Snub")
 end)
 
-local kickLazers = lazerModule:AddButton("Kick-10 Lazers")
+local kickLazers = createButton("Kick-10 Lazers")
 kickLazers.Activated:Connect(function()
-	for i, g in workspace:GetChildren() do
-		if g.Name == "ToolboxMAC10" and g:FindFirstChild("Root") and g:FindFirstChild("Root"):FindFirstChild("Muzzle") then
-			addLaser(g:FindFirstChild("Root"):FindFirstChild("Muzzle"))
-		end
-	end
+    addLazersByName("ToolboxMAC10")
 end)
 
-local carcosaLazers = lazerModule:AddButton("Carcosa Rifle Lazers")
+local carcosaLazers = createButton("Carcosa Rifle Lazers")
 carcosaLazers.Activated:Connect(function()
-	for i, g in workspace:GetChildren() do
-		if g.Name == "Sniper" and g:FindFirstChild("Root") and g:FindFirstChild("Root"):FindFirstChild("Muzzle") then
-			addLaser(g:FindFirstChild("Root"):FindFirstChild("Muzzle"))
-		end
-	end
+    addLazersByName("Sniper")
 end)
 
-local aceLazers = lazerModule:AddButton("Ace Lazers")
+local aceLazers = createButton("Ace Lazers")
 aceLazers.Activated:Connect(function()
-	for i, g in workspace:GetChildren() do
-		if g.Name == "AceCarbine" and g:FindFirstChild("Root") and g:FindFirstChild("Root"):FindFirstChild("Muzzle") then
-			addLaser(g:FindFirstChild("Root"):FindFirstChild("Muzzle"))
-		end
-	end
+    addLazersByName("AceCarbine")
 end)
 
-local magnumLazers = lazerModule:AddButton("Magnum Lazers")
+local magnumLazers = createButton("Magnum Lazers")
 magnumLazers.Activated:Connect(function()
-	for i, g in workspace:GetChildren() do
-		if g.Name == "MAGNUM" and g:FindFirstChild("Root") and g:FindFirstChild("Root"):FindFirstChild("Muzzle") then
-			addLaser(g:FindFirstChild("Root"):FindFirstChild("Muzzle"))
-		end
-	end
+    addLazersByName("MAGNUM")
 end)
 
-local allLazers = lazerModule:AddButton("All Lazers")
+local allLazers = createButton("All Lazers")
 allLazers.Activated:Connect(function()
-	for i, g in workspace:GetChildren() do
-		if (g.Name == "Snub" or g.Name == "Pistol" or g.Name == "DB" or g.Name == "AK47" or g.Name == "ToolboxMAC10" or g.Name == "MP5" or g.Name == "Sniper" or g.Name == "AceCarbine" or g.Name == "MAGNUM") and g:FindFirstChild("Root") and g:FindFirstChild("Root"):FindFirstChild("Muzzle") then
-			addLaser(g:FindFirstChild("Root"):FindFirstChild("Muzzle"))
-		end
-	end
+    local laserNames = {"Snub", "Pistol", "DB", "AK47", "ToolboxMAC10", "MP5", "Sniper", "AceCarbine", "MAGNUM"}
+    for _, name in ipairs(laserNames) do
+        addLazersByName(name)
+    end
 end)
 
 local miscModule = window:createNewModule("Miscellaneous")
