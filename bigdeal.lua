@@ -566,7 +566,7 @@ removeVCWarning.Activated:Connect(function()
 end)
 
 local teleportModule = window:createNewModule("Teleport")
-teleportModule:AddText("!!! WARNING: THIS IS VERY LIKELY TO GET YOU CAUGHT !!!")
+teleportModule:AddText("Use Control to not die!")
 local function teleportTo(part)
 	local char: Model = workspace:WaitForChild(game.Players.LocalPlayer.Name)
 	for i = 1, 10 do
