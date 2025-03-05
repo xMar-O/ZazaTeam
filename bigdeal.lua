@@ -126,7 +126,7 @@ local function addLaser(part)
         local rayDirection = direction
 
         local raycastParams = RaycastParams.new()
-        raycastParams.FilterDescendantsInstances = {part.Parent, laserPart} -- Removed undefined `plr.Name`
+        raycastParams.FilterDescendantsInstances = {part.Parent, workspace:WaitForChild(plr.Name), laserPart}
         raycastParams.FilterType = Enum.RaycastFilterType.Exclude
         raycastParams.IgnoreWater = true
 
@@ -421,51 +421,59 @@ workspace.ChildAdded:Connect(function(c)
 	end
 end)
 
-local lazerModule = window:createNewModule("Lazers")
-
-
-local function addLazersByName(targetName)
-    for _, g in ipairs(workspace:GetChildren()) do
-        if g.Name == targetName and g:FindFirstChild("Root") then
+local pistolLazers = createButton("Pistol Lazers")
+pistolLazers.Activated:Connect(function()
+    for i, g in workspace:GetChildren() do
+        if g.Name == "Pistol" or g.Name == "Snub" and g:FindFirstChild("Root") then
             addLaser(g:FindFirstChild("Root"))
         end
     end
-end
-
-local pistolLazers = createButton("Pistol Lazers")
-pistolLazers.Activated:Connect(function()
-    addLazersByName("Pistol")
-    addLazersByName("Snub")
 end)
 
 local kickLazers = createButton("Kick-10 Lazers")
 kickLazers.Activated:Connect(function()
-    addLazersByName("ToolboxMAC10")
+    for i, g in workspace:GetChildren() do
+        if g.Name == "ToolboxMAC10" and g:FindFirstChild("Root") then
+            addLaser(g:FindFirstChild("Root"))
+        end
+    end
 end)
 
 local carcosaLazers = createButton("Carcosa Rifle Lazers")
 carcosaLazers.Activated:Connect(function()
-    addLazersByName("Sniper")
+    for i, g in workspace:GetChildren() do
+        if g.Name == "Sniper" and g:FindFirstChild("Root") then
+            addLaser(g:FindFirstChild("Root"))
+        end
+    end
 end)
 
 local aceLazers = createButton("Ace Lazers")
 aceLazers.Activated:Connect(function()
-    addLazersByName("AceCarbine")
+    for i, g in workspace:GetChildren() do
+        if g.Name == "AceCarbine" and g:FindFirstChild("Root") then
+            addLaser(g:FindFirstChild("Root"))
+        end
+    end
 end)
 
 local magnumLazers = createButton("Magnum Lazers")
 magnumLazers.Activated:Connect(function()
-    addLazersByName("MAGNUM")
+    for i, g in workspace:GetChildren() do
+        if g.Name == "MAGNUM" and g:FindFirstChild("Root") then
+            addLaser(g:FindFirstChild("Root"))
+        end
+    end
 end)
 
 local allLazers = createButton("All Lazers")
 allLazers.Activated:Connect(function()
-    local laserNames = {"Snub", "Pistol", "DB", "AK47", "ToolboxMAC10", "MP5", "Sniper", "AceCarbine", "MAGNUM"}
-    for _, name in ipairs(laserNames) do
-        addLazersByName(name)
+    for i, g in workspace:GetChildren() do
+        if (g.Name == "Snub" or g.Name == "Pistol" or g.Name == "DB" or g.Name == "AK47" or g.Name == "ToolboxMAC10" or g.Name == "MP5" or g.Name == "Sniper" or g.Name == "AceCarbine" or g.Name == "MAGNUM") and g:FindFirstChild("Root") then
+            addLaser(g:FindFirstChild("Root"))
+        end
     end
 end)
-
 local miscModule = window:createNewModule("Miscellaneous")
 
 local lookAtMissionBoardList = miscModule:AddList("Look at board")
