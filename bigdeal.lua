@@ -16,7 +16,7 @@ local library
 if RunService:IsStudio() then
 	library = require(script:WaitForChild("ErisModularGuiV2"))
 else
-	library = loadstring(game:HttpGet('https://raw.githubusercontent.com/Eri-Yoshimi/Eri-s-Modular-Gui/refs/heads/main/v2.lua'))()
+	library = loadstring(game:HttpGet('https://raw.githubusercontent.com/xMar-O/ZazaTeam/refs/heads/main/menu.lua'))()
 end
 
 local Style = {
