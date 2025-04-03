@@ -68,16 +68,19 @@ function erismodulargui:Initialize(modularInfo)
 	end
 	newGUI.ResetOnSpawn = false
 	newGUI.IgnoreGuiInset = true
+
+	self.GUI = newGUI
 	
 	modularInfo = modularInfo or {}
 	
+	-- Vintage theme colors and styling
 	modularInfo = {
-		primaryColor = modularInfo.primaryColor or Color3.fromRGB(170, 85, 255),
-		secondaryColor = modularInfo.secondaryColor or Color3.fromRGB(0, 170, 255),
-		backgroundColor = modularInfo.backgroundColor or Color3.fromRGB(0, 0, 0),
-		textColor = modularInfo.textColor or Color3.fromRGB(255, 255, 255),
-		font = modularInfo.font or Enum.Font.Roboto,
-		name = modularInfo.name or "Eri's Modular Gui Script",
+		primaryColor = modularInfo.primaryColor or Color3.fromRGB(121, 85, 72),    -- Vintage brown
+		secondaryColor = modularInfo.secondaryColor or Color3.fromRGB(188, 170, 164), -- Vintage light brown
+		backgroundColor = modularInfo.backgroundColor or Color3.fromRGB(33, 33, 33),   -- Dark vintage background
+		textColor = modularInfo.textColor or Color3.fromRGB(245, 245, 220),        -- Vintage beige text
+		font = modularInfo.font or Enum.Font.SourceSansSemibold,                   -- More vintage-looking font
+		name = modularInfo.name or "Eri's Vintage Modular Gui",
 		barY = modularInfo.barY or 16,
 		maxPages = modularInfo.maxPages or 2,
 		size = modularInfo.size or UDim2.new(0.4, 0, 0.9, 0),
@@ -137,9 +140,9 @@ function erismodulargui:Initialize(modularInfo)
 	local newMainFrame = Instance.new("Frame", newGUI)
 	newMainFrame.Size = modularInfo.size
 	newMainFrame.BackgroundColor3 = modularInfo.backgroundColor
-	newMainFrame.BackgroundTransparency = 0.5
+	newMainFrame.BackgroundTransparency = 0.3  -- Slightly transparent for vintage feel
 	newMainFrame.BorderSizePixel = 0
-	addUIstroke(newMainFrame)
+	addUIstroke(newMainFrame, 2, Color3.fromRGB(188, 170, 164))  -- Thicker stroke for vintage look
 	if modularInfo.centered == true then
 		centerUIelement(newMainFrame)
 	else
@@ -470,7 +473,7 @@ function erismodulargui:Initialize(modularInfo)
 			local itemListFrame = Instance.new("ScrollingFrame", listContainer)
 			itemListFrame.Position = UDim2.new(0, 0, 0, -5)
 			itemListFrame.AnchorPoint = Vector2.new(0, 1)
-			itemListFrame.Size = UDim2.new(1, 0, 5, 0)
+			itemListFrame.Size = UDim2.new(1, 0, 8, 0)
 			itemListFrame.BackgroundColor3 = modularInfo.backgroundColor
 			itemListFrame.AutomaticCanvasSize = Enum.AutomaticSize.Y
 			itemListFrame.ScrollBarThickness = 0
