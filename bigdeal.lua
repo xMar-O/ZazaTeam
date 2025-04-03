@@ -5,6 +5,58 @@ local minESPsize = 2
 local lazerWidth = 0.05
 -----------------------------------------------------------------------------------------------------------------
 
+--[[-------------------------------------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------------------------------------
+         .:':'`:·          ,:´'`;' ‘               ,.-:^*:*:^:~,'       
+       /:::::::/`·,      /::::/;‘            ,:´:::::::::::::::/_‚     
+      /:·*'`·:/:::::' , /·´'`;/::';'          /::;:-·^*'*'^~-;:/::/`;   '
+    ,'         `:;::::'`i    ';:::';         /:´    ,. –.,_,.'´::/:::';' '
+    ;            '`;:::'i    'i::::i      ,/    ,:´';         ;'´¯`,:::'i' 
+    i               `;:';    'i:::i'   ' ,'     ';:::`,       ,:     ';::i‘ 
+    i      ,          \|     '|:::i°   ;      ';:::/:`::^*:´;      i::';'‘
+    |     ,'`,                i:;'' ‚   i       `;/::::::::,·´      ';:/'‘ 
+    'i    'i:::i',             ';/'      ';         '` *^*'´         .'/‘   
+    'i     ;::/ \           ;/'         '\                         /     
+     \    'i/    '`·,      ,''             `·,                ,-·´ '      
+      '`~´         '`·–·'´'                 '`*~·––·~^'´  '          
+                        ‘                        '                      
+      -~·-.'´::`;-:~.~·–.,   °          ',:'/¯/`:,                    __'             
+  /:::::/::::/::::::::::::::'`,            /:/_/::::/';'           ,.·:'´::::::::`'·-.      
+ /-~·-'·´¯`·-~·––  ::;:::::'i'         /:'     '`:/::;‘        '/::::::::::::::::::';     
+ '`·,                       '`;::';        ;         ';:';‘       /;:· '´ ¯¯  `' ·-:::/'     
+    '`i       'i*^~;          'i / °      |         'i::i      /.'´      _         ';/' ‘    
+     ';       ; / ,·          .'/',        ';        ;'::i    ,:     ,:'´::;'`·.,_.·'´.,    ‘ 
+     ';      ;' ;´         ~´;:::'i°      'i        'i::i'   /     /':::::/;::::_::::::::;‘  
+   /´:;     ;–·:`:,          '`;:/°       ;       'i::;' ,'     ;':::::'/·´¯     ¯'`·;:::¦‘ 
+,/::;:'\,  '/::::::;'           'i/' °       ';       i:/'  'i     ';::::::'\             ';:';‘ 
+'.     '` '´·–·~*´           ,'  '          ';     ;/ °   ;      '`·:;:::::`'*;:'´      |/'  
+  ` ·-.,                 ,-·´   '            ';   / °      \          '`*^*'´         /'  ‘ 
+         '`*^~·- ·^*'´     '                 `'´       °    `·.,               ,.-·´      
+                   '                           ‘                  '`*^~·~^*'´            
+   ,._., ._                                      ,.-:~:'*:~-.°               ,.-:~:-.                    ___               
+  /::::::::::'/:/:~-.,                        .·´:::::::::::::::;             /':::::::::'`,              .:´/::::;'`;     ‘       
+ /:-·:;:-·~·';/:::::::::`·-.                /::;:-·~^*^~-:;:/ °          /;:-·~·-:;':::',            /::/::::/:::/'i           
+ ';           '`~-:;:::::::::'`,         ,.-/:´     .,       ;/            ,'´          '`:;::`,         /·´¯¯¯'`;/::'i'       ‚   
+  ',.                 '`·-:;:::::'i'‘     /::';      ,'::`:~.-:´;           /                `;::\       i          'i::'¦            
+    `'i      ,_            '`;:::'¦‘    /;:- ´        `'·–·;:'/' _       ,'                   '`,::;     ';          ¦::;            
+     'i      ;::/`:,          i'::/   /     ;:'`:.., __,.·'::/:::';     i'       ,';´'`;         '\:::', ‘  ;         ;::;  °         
+    _;     ;:/;;;;:';        ¦'/    ;'      ';:::::::::::::::/;;::/   ,'        ;' /´:`';         ';:::'i‘  ';        ;:,'_ ,.-·~^; °
+   /::';   ,':/::::::;'       ,´     ¦         '`·-·:;::·-·'´   ';:/‘   ;        ;/:;::;:';         ',:::;   ';      ';:/:::::::::/::i' 
+,/-:;_i  ,'/::::;·´        ,'´      '\                         /'    'i        '´        `'         'i::'/   ,:      '/::;:-·~^';::'/' 
+'`·.     `'¯¯     '   , ·'´           `·,                  ,·'  '    ¦       '/`' *^~-·'´\         ';'/'‚  i´        ¯          'i/ ' 
+    `' ~·- .,. -·~ ´                    '`~·- . , . -·'´          '`., .·´              `·.,_,.·´  ‚  '`·,_          _ , ·'´‘   
+           '                                                                                                 ¯ `'*'´ ¯     '      
+-----------------------------------------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------------------------------------
+-------------------------------------------------------------------------------------------------------------]]--
+
+-- Actuall code down here!!! ------------------------------------------------------------------------------------
+
 -- Global Variables ---------------------------------------------------------------------------------------------
 local plr = game.Players.LocalPlayer
 local camera = workspace.CurrentCamera
@@ -16,15 +68,15 @@ local library
 if RunService:IsStudio() then
 	library = require(script:WaitForChild("ErisModularGuiV2"))
 else
-	library = loadstring(game:HttpGet('https://raw.githubusercontent.com/xMar-O/ZazaTeam/refs/heads/main/menu.lua'))()
+	library = loadstring(game:HttpGet('https://raw.githubusercontent.com/Eri-Yoshimi/Eri-s-Modular-Gui/refs/heads/main/v2.lua'))()
 end
 
 local Style = {
-	name = "The Zaza Team!",
+	name = "No Big Deal script by Eri",
 	size = UDim2.new(0, 600, 0, 400),
-	primaryColor = Color3.new(0.2, 0.4, 0.6),
-	secondaryColor = Color3.new(0.3, 0.6, 0.8),
-	backgroundColor = Color3.new(0.1, 0.1, 0.1),
+	primaryColor = Color3.new(0.615686, 0.47451, 0.305882),
+	secondaryColor = Color3.new(0.670588, 0.584314, 0.388235),
+	backgroundColor = Color3.new(0, 0, 0),
 	draggable = true,
 	centered = false,
 	freemouse = true,
@@ -33,7 +85,6 @@ local Style = {
 	startMinimized = false,
 	toggleBind = toggleKey,
 }
-
 
 local window = library:Initialize(Style)
 
@@ -51,7 +102,7 @@ local espTextVisible = false
 local borderThickness = 1
 
 local function CreateESP(basepart, color)
-	local newEspGui = Instance.new("BillboardGui", plr.PlayerGui)
+	local newEspGui = Instance.new("BillboardGui", window.GUI)
 	newEspGui.Adornee = basepart
 	newEspGui.AlwaysOnTop = true
 	newEspGui.ResetOnSpawn = false
@@ -101,8 +152,9 @@ local function lookAtBoard(board)
 	end)
 end
 
-local function addLaser(part)
-	if not part or not part:IsA("Attachment") then
+local raylazertype = true
+local function addLaser(attachment: Attachment)
+	if not attachment or not attachment:IsA("Attachment") then
 		return
 	end
 
@@ -113,21 +165,21 @@ local function addLaser(part)
 	laserPart.CastShadow = false
 	laserPart.Material = Enum.Material.Neon
 	laserPart.Color = Color3.fromRGB(255, 0, 0)
-	laserPart.Size = Vector3.new(lazerWidth, lazerWidth, 1)
+	laserPart.Size = Vector3.new(lazerWidth, lazerWidth, 1000)
 
 	local function updateLaser()
-		if not part or not part.Parent then
+		if not attachment or not attachment.Parent then
 			laserPart:Destroy()
 			return
 		end
 
-		local startPos = part.WorldCFrame.Position
-		local direction = part.WorldCFrame.LookVector * 5000
+		local startPos = attachment.WorldCFrame.Position
+		local direction = attachment.WorldCFrame.LookVector * 5000
 		local rayOrigin = startPos
 		local rayDirection = direction
 
 		local raycastParams = RaycastParams.new()
-		raycastParams.FilterDescendantsInstances = {part.Parent.Parent, laserPart, workspace:FindFirstChild(plr.Name)}
+		raycastParams.FilterDescendantsInstances = {attachment.Parent.Parent, laserPart, workspace:FindFirstChild(plr.Name)}
 		raycastParams.FilterType = Enum.RaycastFilterType.Exclude
 		raycastParams.IgnoreWater = true
 
@@ -147,12 +199,18 @@ local function addLaser(part)
 			laserPart.CFrame = CFrame.new(startPos, maxEnd) * CFrame.new(0, 0, -laserLength / 2)
 		end
 	end
-
-	game:GetService("RunService").Heartbeat:Connect(updateLaser)
+	
+	if raylazertype then
+		game:GetService("RunService").Heartbeat:Connect(updateLaser)
+	else
+		RunService.Heartbeat:Connect(function(dt)
+			laserPart.CFrame = attachment.WorldCFrame + (attachment.WorldCFrame.LookVector * laserPart.Size.Z / 2)
+		end)
+	end
 end
 
-if game.ReplicatedFirst:FindFirstChild("doiii") then
-    game.ReplicatedFirst:FindFirstChild("doiii").Enabled = false
+if game.ReplicatedFirst:FindFirstChild("first") then
+	--game.ReplicatedFirst:FindFirstChild("first").Enabled = false
 end
 
 local cash = {}
@@ -190,20 +248,22 @@ local function updateGroupMarkers(groups)
 			local avgPosition = getAveragePosition(group) + Vector3.new(0, 100, 0)
 
 			if markers[i] then
-				markers[i].marker.Position = avgPosition
+				--markers[i].marker.Position = avgPosition
+				markers[i].marker.StudsOffsetWorldSpace = avgPosition
 				markers[i].text.Text = "$"..#group
 			else
-				local marker = Instance.new("Part")
-				marker.Size = Vector3.new(5, 5, 5)
-				marker.Position = avgPosition
-				marker.Anchored = true
-				marker.CanCollide = false
-				marker.Transparency = 1
-				marker.Material = Enum.Material.Neon
-				marker.Parent = workspace
+				--local marker = Instance.new("Part")
+				--marker.Size = Vector3.new(5, 5, 5)
+				--marker.Position = avgPosition
+				--marker.Anchored = true
+				--marker.CanCollide = false
+				--marker.Transparency = 1
+				--marker.Material = Enum.Material.Neon
+				--marker.Parent = window.GUI
 
-				local newEspGui = Instance.new("BillboardGui", game.Players.LocalPlayer.PlayerGui)
-				newEspGui.Adornee = marker
+				local newEspGui = Instance.new("BillboardGui", window.GUI)
+				newEspGui.StudsOffsetWorldSpace = avgPosition
+				--newEspGui.Adornee = marker
 				newEspGui.AlwaysOnTop = true
 				newEspGui.ResetOnSpawn = false
 				task.delay(5, function()
@@ -220,7 +280,8 @@ local function updateGroupMarkers(groups)
 
 				markerText.Text = "$"..#group
 
-				markers[i] = {marker = marker, text = markerText}
+				markers[i] = {marker = newEspGui, text = markerText}
+				--markers[i] = {marker = marker, text = markerText}
 			end
 		else
 			-- If the group is empty, destroy the marker
@@ -236,7 +297,7 @@ end
 local function groupCashObjects()
 	local groups = {}
 	local visited = {}
-	
+
 	for i, c in cash do
 		if c == nil or c.Parent == nil or c.Parent.Parent == nil then
 			table.remove(cash, i)
@@ -259,7 +320,7 @@ local function groupCashObjects()
 			table.insert(groups, group)
 		end
 	end
-	
+
 	updateGroupMarkers(groups)
 end
 
@@ -382,7 +443,6 @@ PlayerESP.Activated:Connect(function()
 				local createdESP = CreateESP(playerChar:FindFirstChild("Head"), Color3.new(1, 1, 1))
 				createdESP:FindFirstChildOfClass("TextLabel").TextTransparency = 1
 				createdESP:FindFirstChildOfClass("TextLabel"):FindFirstChildOfClass("UIStroke").Thickness = 1
-				createdESP:FindFirstChildOfClass("TextLabel"):FindFirstChildOfClass("UIStroke").Transparency = 0
 				table.remove(ESPCache, table.find(ESPCache, createdESP))
 				table.insert(createdPlayerESPs, createdESP)
 			end
@@ -390,7 +450,6 @@ PlayerESP.Activated:Connect(function()
 				local createdESP = CreateESP(playerChar:FindFirstChild("Torso"), Color3.new(1, 1, 1))
 				createdESP:FindFirstChildOfClass("TextLabel").TextTransparency = 1
 				createdESP:FindFirstChildOfClass("TextLabel"):FindFirstChildOfClass("UIStroke").Thickness = 1
-				createdESP:FindFirstChildOfClass("TextLabel"):FindFirstChildOfClass("UIStroke").Transparency = 0
 				table.remove(ESPCache, table.find(ESPCache, createdESP))
 				table.insert(createdPlayerESPs, createdESP)
 			end
@@ -405,7 +464,6 @@ workspace.ChildAdded:Connect(function(c)
 			local createdESP = CreateESP(c:FindFirstChild("Head"), Color3.new(1, 1, 1))
 			createdESP:FindFirstChildOfClass("TextLabel").TextTransparency = 1
 			createdESP:FindFirstChildOfClass("TextLabel"):FindFirstChildOfClass("UIStroke").Thickness = 1
-			createdESP:FindFirstChildOfClass("TextLabel"):FindFirstChildOfClass("UIStroke").Transparency = 0
 			table.remove(ESPCache, table.find(ESPCache, createdESP))
 			table.insert(createdPlayerESPs, createdESP)
 		end
@@ -413,7 +471,6 @@ workspace.ChildAdded:Connect(function(c)
 			local createdESP = CreateESP(c:FindFirstChild("Torso"), Color3.new(1, 1, 1))
 			createdESP:FindFirstChildOfClass("TextLabel").TextTransparency = 1
 			createdESP:FindFirstChildOfClass("TextLabel"):FindFirstChildOfClass("UIStroke").Thickness = 1
-			createdESP:FindFirstChildOfClass("TextLabel"):FindFirstChildOfClass("UIStroke").Transparency = 0
 			table.remove(ESPCache, table.find(ESPCache, createdESP))
 			table.insert(createdPlayerESPs, createdESP)
 		end
@@ -421,6 +478,11 @@ workspace.ChildAdded:Connect(function(c)
 end)
 
 local lazerModule = window:createNewModule("Lazers")
+
+local jjxenoFix, jjxenoFixToggled = lazerModule:AddToggle("JJ/Xeno lazer fix")
+jjxenoFix.Activated:Connect(function()
+	raylazertype = not jjxenoFixToggled:GetState()
+end)
 
 local pistolLazers = lazerModule:AddButton("Pistol Lazers")
 pistolLazers.Activated:Connect(function()
@@ -470,7 +532,7 @@ end)
 local allLazers = lazerModule:AddButton("All Lazers")
 allLazers.Activated:Connect(function()
 	for i, g in workspace:GetChildren() do
-		if (g.Name == "Snub" or g.Name == "Pistol" or g.Name == "DB" or g.Name == "AK47" or g.Name == "ToolboxMAC10" or g.Name == "MP5" or g.Name == "Sniper" or g.Name == "AceCarbine" or g.Name == "MAGNUM") and g:FindFirstChild("Root") and g:FindFirstChild("Root"):FindFirstChild("Muzzle") then
+		if (g.Name == "Snub" or g.Name == "Pistol" or g.Name == "DB" or g.Name == "AK47" or g.Name == "ToolboxMAC10" or g.Name == "PitchGun" or g.Name == "Sniper" or g.Name == "AceCarbine" or g.Name == "MAGNUM" or g.Name == "Strikeout" or g.Name == "TheFix" or g.Name == "Liquidator" or g.Name == "Forte" or g.Name == "Deagle") and g:FindFirstChild("Root") and g:FindFirstChild("Root"):FindFirstChild("Muzzle") then
 			addLaser(g:FindFirstChild("Root"):FindFirstChild("Muzzle"))
 		end
 	end
@@ -478,10 +540,18 @@ end)
 
 local miscModule = window:createNewModule("Miscellaneous")
 
+local baseTeamNames = {
+	"Alamont",
+	"Halfwell",
+	"Bergman",
+	"Renetti",
+	"Yoromoto",
+}
+
 local lookAtMissionBoardList = miscModule:AddList("Look at board")
-lookAtMissionBoardList:AddListItem("Alamont", "1")
-lookAtMissionBoardList:AddListItem("Bergman", "3")
-lookAtMissionBoardList:AddListItem("Halfwell", "2")
+for i, t in baseTeamNames do
+	lookAtMissionBoardList:AddListItem(t, i)
+end
 lookAtMissionBoardList.OnItemChanged:Connect(function(boardID)
 	local board = workspace:WaitForChild("CurrentMap"):WaitForChild("Round"):WaitForChild("Core"):WaitForChild("Bases"):WaitForChild(boardID):WaitForChild("MissionBoard")
 	lookAtBoard(board)
@@ -515,7 +585,7 @@ if game.ReplicatedStorage:FindFirstChild("Remotes") then
 	end
 end
 
-local hearAllPlayersOutput = Instance.new("AudioDeviceOutput", plr)
+local hearAllPlayersOutput = Instance.new("AudioDeviceOutput", window.GUI)
 hearAllPlayersOutput.Name = "HearAllPlayers"
 hearAllPlayersOutput.Player = plr
 local hearAllPlayersVolumeControl = Instance.new("AudioFader", hearAllPlayersOutput)
@@ -548,13 +618,13 @@ volumeSlider.OnValueChanged:Connect(function(value)
 end)
 hearAllPlayersVolumeControl.Volume = volumeSlider:GetValue() or 0
 
-local showTeamSelectionMenu, toggledTeamSelectionMenu = miscModule:AddToggle("Toggle Team Selection Menu")
-showTeamSelectionMenu.Activated:Connect(function()
-	local teamMenu = plr.PlayerGui.RootGui.TeamFrame
-	if teamMenu then
-		teamMenu.Visible = toggledTeamSelectionMenu:GetState()
-	end
-end)
+--local showTeamSelectionMenu, toggledTeamSelectionMenu = miscModule:AddToggle("Toggle Team Selection Menu")
+--showTeamSelectionMenu.Activated:Connect(function()
+--	local teamMenu = plr.PlayerGui.ReactHandler.TeamSelector
+--	if teamMenu then
+--		teamMenu.Visible = toggledTeamSelectionMenu:GetState()
+--	end
+--end)
 
 local removeVCWarning = miscModule:AddButton("Remove VC Warning Gui")
 removeVCWarning.Activated:Connect(function()
@@ -565,27 +635,49 @@ removeVCWarning.Activated:Connect(function()
 end)
 
 local teleportModule = window:createNewModule("Teleport")
-teleportModule:AddText("Use Control to not die!")
+
 local function teleportTo(part)
 	local char: Model = workspace:WaitForChild(game.Players.LocalPlayer.Name)
-	for i = 1, 10 do
-		char:PivotTo(part.CFrame)
-		char:FindFirstChild("HumanoidRootPart").Velocity = 0
-		wait()
+	for i = 1, 2 do
+		for i = 1, 10 do
+			char:PivotTo(part.CFrame + Vector3.new(0, 130, 0))
+			char:FindFirstChild("HumanoidRootPart").Velocity = Vector3.zero
+			wait()
+			char:PivotTo(part.CFrame + Vector3.new(0, 125, 0))
+			wait()
+		end
+		wait(1)
 	end
 end
+
+teleportModule:AddText("!!! WARNING: THIS IS VERY LIKELY TO GET YOU CAUGHT !!!")
+teleportModule:AddText("To teleport you have to be in ragdoll mode first.")
+
+local deadDropTPs = teleportModule:AddList("Place Teleports")
 if workspace:FindFirstChild("CurrentMap") then
-	for i, v in workspace:WaitForChild("CurrentMap"):WaitForChild("Round"):WaitForChild("Tempmarkers"):GetChildren() do
-		teleportModule:AddButton(v.Name).Activated:Connect(function()
-			teleportTo(v)
-		end)
+	for i, v in workspace:WaitForChild("CurrentMap"):WaitForChild("Round"):WaitForChild("Core"):WaitForChild("DeadDrops"):GetChildren() do
+		deadDropTPs:AddListItem(v.Name, v)
 	end
 end
+deadDropTPs.OnItemChanged:Connect(function(place)
+	teleportTo(place)
+end)
+
+local baseTPs = teleportModule:AddList("Base Teleports")
+for i, t in baseTeamNames do
+	baseTPs:AddListItem(t, i)
+end
+baseTPs.OnItemChanged:Connect(function(baseID)
+	local base = workspace:WaitForChild("CurrentMap"):WaitForChild("Round"):WaitForChild("Core"):WaitForChild("Bases"):WaitForChild(baseID):WaitForChild("Bounds")
+	teleportTo(base)
+end)
 
 local trollModule = window:createNewModule("Troll")
 
-trollModule:AddText("Muah 3lik a ali")
-local carKill, carKillToggled = trollModule:AddToggle("Kill All (Must be in car)")
+trollModule:AddText("!!! WARNING: THIS IS WILL GET YOU CAUGHT !!!")
+
+trollModule:AddText("Get in a driver seat in a car and toggle this on to start killing everyone.")
+local carKill, carKillToggled = trollModule:AddToggle("Car Kill")
 carKill.Activated:Connect(function()
 	task.spawn(function()
 		while wait(math.random(5, 25)/100) and plr.Character and carKillToggled:GetState() == true do
@@ -607,8 +699,8 @@ end)
 
 -- Credit Notification ------------------------------------------------------------------------------------------
 CoreGui:SetCore("SendNotification", {
-	Title = "No Big Deal Injected";
-	Text = "Much Love Maro";
+	Title = "No Big Deal Cheat Injected";
+	Text = "Made by Eri";
 	Duration = 5;
 })
 -----------------------------------------------------------------------------------------------------------------
